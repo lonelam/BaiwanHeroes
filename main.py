@@ -62,6 +62,7 @@ def main():
     keywords = get_text_from_image(
         image_data=text_binary,
     )
+    keywords
     if not keywords:
         print("text not recognize")
         return
@@ -79,7 +80,10 @@ def main():
         for a, b in
         zip(answers, weight_li)
     }
-    summary_li = sorted(summary.items(), key=operator.itemgetter(1), reverse=True)
+    is_face = True
+    if question.find('错误') != -1 or question.find('不') != -1:
+        is_face = False
+    summary_li = sorted(summary.items(), key=operator.itemgetter(1), reverse=is_face)
     print("-" * 50)
     print("\n".join([a + ":" + str(b) for a, b in summary_li]))
     print("*" * 50)

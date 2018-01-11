@@ -13,6 +13,7 @@ import requests
 from lxml import html
 
 
+
 def zhidao_search(keyword, default_answer_select, timeout=2):
     """
     Search BaiDu zhidao net
@@ -54,7 +55,7 @@ def search_result_number(keyword, timeout=2):
     result = parser.xpath("//div[@class='nums']/text()")
     if not result:
         return 0
-
+    print(keyword, int(get_general_number(result[0])))
     return int(get_general_number(result[0]))
 
 

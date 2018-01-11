@@ -9,11 +9,11 @@
 """
 from concurrent.futures import ThreadPoolExecutor
 from concurrent.futures import as_completed
-
 import operator
 from functools import partial
 
-from core.baiduzhidao import search_result_number
+from core.fenci import cut
+from core.googlesearch import search_result_numberx
 
 
 def current_fetch(keywords_li):
@@ -56,9 +56,14 @@ def calculate_relation(question, answers):
     :param answers:
     :return:
     """
+
+    #搜索前分词来提高相似度
+
+    question = cut(question)
+
     keywords_li = []
     keywords_li.extend(answers)
-    keywords_li.extend([question + " " + item for item in answers])
+    keywords_li.extend([item + " " + question for item in answers])
 
     results = current_fetch(keywords_li)
     answ_len = len(answers)
